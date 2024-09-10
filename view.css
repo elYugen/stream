@@ -1,0 +1,105 @@
+.player {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.playerImage{
+    position: relative;
+    width: 100%;
+    height: 250px;
+    margin-top: -10px;
+}
+
+.playerImage img{
+    width: 100%;
+    height: 250px;
+}
+
+.playerImage iframe{
+    width: 100% !important;
+    height: 250px !important;
+}
+
+.play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #2d3240;
+    font-size: 24px;
+    color: #2eaebf;
+    box-shadow: 0 0 18px 1px rgba(46, 174, 191, 0.2);
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+}
+
+.genre {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 80%;
+    font-weight: 400;
+    margin-top: -20px;
+    color: #91949c;
+}
+
+.description {
+    color: lightgray;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+}
+
+.episode {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.episodeList {
+    display: flex;
+    flex-direction: column;
+}
+
+.episodeListInfo {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.episodeListInfo img {
+    border-radius: 5px;
+}
+
+.episodeListInfoEpisode {
+    display: flex;
+    flex-direction: column;
+    margin-top: -15px;
+}
+
+.episodeListInfoEpisode h4 {
+    color: #91949c;
+    font-weight: 400;
+}
+
+.episodeListInfoEpisode p {
+    margin-top: -5px;
+}

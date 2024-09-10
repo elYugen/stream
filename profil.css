@@ -1,0 +1,113 @@
+.profile {
+    display: flex;
+    flex-direction: row;   
+    align-items: center;
+    justify-content: center; 
+    position: relative; 
+    width: 100%;
+}
+
+.profileYou {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.profileYou h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #91949c;
+    margin-top: -15px;
+}
+
+.profilePicture {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    overflow: hidden;  
+    display: flex;
+}
+
+.profileNotif {
+    position: absolute; /* Positionner par rapport au conteneur parent */
+    top: 15px; /* Ajustez selon vos besoins */
+    right: 15px; /* Ajustez selon vos besoins */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #2eaebf;
+    font-size: 24px;
+    color: #2d3240;
+    box-shadow: 0 0 18px 1px rgba(46, 174, 191, 0.2);
+}
+
+
+.watchingCollection {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    overflow-x: auto;
+    white-space: nowrap; 
+    max-width: 100%;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+}
+
+.watchingCollection::-webkit-scrollbar {
+    display: none;
+}
+
+.watchingCollectionCard {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.watchingCollectionCardImage img {
+    border-radius: 15px;
+    width: 200px;
+    height: 200px;
+}
+
+.containerProfil {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    gap: 10px;
+    padding-bottom: 60px;
+    margin-top: -15px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+}
+
+.optionsSettings {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    color: #2eaebf;
+}
+
+.logout input[type="submit"] {
+    border: none;
+    background: transparent;
+    color: #2eaebf;
+    padding: 0;
+    margin: 0;
+}
