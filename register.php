@@ -2,29 +2,25 @@
 require_once('function.php');
 session_start();
 
+
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-
     if (!empty($username) && !empty($password)) {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $dbh = dbconnect();
 
-        $query = "SELECT * FROM user WHERE username = :username";
+        $query = "INSERT INTO user (username, password) VALUES (:username, :password)";
         $stmt = $dbh->prepare($query);
-        $stmt->bindParam(':username', $username, PDO::PARAM_STR);
-        $stmt->execute();
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['username'] = $user['username'];
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $hashed_password);
 
-                header("Location: home.php");
-                exit();
-            } else {
-                echo "mdp incorrect";
-            }
+        if ($stmt->execute()) {
+            $_SESSION['username'] = $username;
+            header("Location: home.php");
+            exit;
         } else {
-            echo "utilisateur non trouvé";
+            echo "erreur";
         }
     } else {
         echo "champ manquant";
@@ -48,8 +44,8 @@ if (isset($_POST['login'])) {
 <body>
     <div class="container">
         <div class="login">
-            <h1>Connexion</h1>
-            <form action="index.php" method="post" class="loginForm">
+            <h1>Inscription</h1>
+            <form action="" method="post" class="loginForm">
                 <label>Pseudo</label>
                 <input type="text" name="username" class="loginFormInput">
                 <br />
@@ -57,11 +53,9 @@ if (isset($_POST['login'])) {
                 <input type="password" name="password" class="loginFormInput">
                 <br />
                 <input type="submit" name="login" value="Me Connecter" class="loginFormButton">
-                <a href="register.php"><input type="button" value="Inscription" class="loginFormButton"></a>
                 <div class="invite"><a href="./home.php?guest=true"><p>Continuer en tant qu'invité</p></a></div>
             </form>
         </div>
     </div>
-
 </body>
 </html>

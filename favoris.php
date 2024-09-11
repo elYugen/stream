@@ -1,3 +1,6 @@
+<?php 
+require_once ('partials/session.php');
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

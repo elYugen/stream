@@ -85,6 +85,11 @@
     gap: 15px;
 }
 
+.episodeListInfoImage img {
+    width: 200px;
+    height: 110px;
+}
+
 .episodeListInfo img {
     border-radius: 5px;
 }

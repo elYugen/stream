@@ -2,19 +2,35 @@
 
 require_once ('function.php'); 
 
-session_start();
-
-$user = $_SESSION["username"];
+require_once ('partials/session.php');
 
 if(isset($_GET['id']) && !empty($_GET['id'])){
     $id = $_GET['id'];
     $serie = getOneSerie($id);
-    $serieGenre = getSerieGenreByGenreId($id);
+    $serieGenre = getSerieGenreBySerieIdBecauseThisShitIsGoingToMakeMeCrazy($id);
+    $serieSeason = getAllSeasonOfThisFuckingSerieBySerieId($id);
+    $serieEpisode = getAllEpisodesOfSerieBySerieId($id);
     // var_dump($serie);
+    // var_dump($serieGenre);
+    // var_dump($serieEpisode);
 }else {
     header('location:404.php');
 }
 
+$seasons = array();
+foreach ($serieEpisode as $episode) {
+    $seasonId = $episode['season_id'];
+    $seasonNumber = $episode['number'];
+
+
+    if (!isset($seasons[$seasonId])) {
+        $seasons[$seasonId] = array(
+            'season_number' => $seasonNumber,
+            'episodes' => array()
+        );
+    }
+    $seasons[$seasonId]['episodes'][] = $episode;
+}
 
 ?>
 <!DOCTYPE html>
@@ -50,54 +66,32 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
         <div class="about">
             <h2><?php echo $serie['title'] ?></h2>
             <div class="genre">
-            <?php echo "<p>" . $serieGenre['genre_name'] . "</p>"; ?>
-            </div>
-
-            <div class="description">
-                <h3>A Propos</h3>
-                <p><?php echo $serie['about'] ?></p>
-            </div>
-
-            <div class="episode">
-            <div class="episodeList">
-                <h3>S1 - Série</h3>
-                <div class="episodeListInfo">
-                    <img src="https://placehold.co/200x110" alt="ProfilPicture">
-                    <div class="episodeListInfoEpisode">
-                        <h4 id="serieTitle">Titre</h4>
-                        <p>E1 - Série Super Génial</p>
-                    </div>
-                </div>
-            </div>
-            <!-- INSERER AUTRE EPISODE -->
-            <div class="episodeList">
-                <div class="episodeListInfo">
-                    <img src="https://placehold.co/200x110" alt="ProfilPicture">
-                    <div class="episodeListInfoEpisode">
-                        <h4 id="serieTitle">Titre</h4>
-                        <p>E2 - Il a pas fait ça ?</p>
-                    </div>
-                </div>
-            </div>
-            <div class="episodeList">
-                <div class="episodeListInfo">
-                    <img src="https://placehold.co/200x110" alt="ProfilPicture">
-                    <div class="episodeListInfoEpisode">
-                        <h4 id="serieTitle">Titre</h4>
-                        <p>E3 - J'y crois pas !!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="episodeList">
-                <div class="episodeListInfo">
-                    <img src="https://placehold.co/200x110" alt="ProfilPicture">
-                    <div class="episodeListInfoEpisode">
-                        <h4 id="serieTitle">Titre</h4>
-                        <p>E4 - Bon bah salut</p>
-                    </div>
-                </div>
+                <?php foreach ($serieGenre as $allGenre) { ?>
+                    <?php echo "<p>" . $allGenre['genre_name'] . "</p>"; ?>
+                <?php } ?>
             </div>
         </div>
+        <div class="description">
+            <h3>A Propos</h3>
+            <p><?php echo $serie['about'] ?></p>
+        </div>
+
+        <div class="episode">
+        <?php foreach ($seasons as $seasonId => $seasonData) { ?>
+        <h3><?php echo $seasonData['season_number'] ?></h3>
+        <?php foreach ($seasonData['episodes'] as $episode) { ?>
+        <div class="episodeListInfo">
+            <img src="<?php echo $episode['vignette'] ?>" style="width:200px; height:110px;" alt="Episode Thumbnail">
+            <div class="episodeListInfoEpisode">
+                <?php echo "<h4 id='serieTitle'>" . strtoupper($serie['title']) . "</h4>" ?>
+                <?php echo "<p>" . $episode['nom'] . "</p>" ?>
+            </div>
+        </div>
+        <?php } ?>
+        <?php } ?>
+
+        </div>
+        
         </div>
     </div>
 

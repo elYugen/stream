@@ -1,6 +1,6 @@
 <?php 
     require_once('function.php');
-    session_start();
+    require_once ('partials/session.php');
 
     $user = $_SESSION["username"];
 ?>

@@ -1,8 +1,7 @@
 <?php 
     require_once('function.php');
-    session_start();
-
-    $user = $_SESSION["username"];
+    require_once ('partials/session.php');
+    
     $series = getAllSeries();
 ?>
 

@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     width: 100%;
 }
 
@@ -12,16 +11,16 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    border: 1px solid black;
     width: 100%;
 }
 
 .loginForm a {
     color: white;
 }
-.loginForm input {
+.loginFormInput {
     background-color: #2d3240;
-    width: 100%;
+    width: 80%;
+    max-width: 100%;
     height: 40px;
     border-radius: 15px;
     border: 2px solid transparent;
@@ -31,13 +30,21 @@
     transition: border-color 0.3s ease; 
 }
 
-.loginForm input:focus {
+.loginFormInput:focus {
     outline: none; 
     border-color: rgba(46, 174, 191, 0.2); 
     box-shadow: 0 0 0 3px rgba(46, 174, 191, 0.1); 
 }
 
 .loginFormButton {
+    width: 100%;
+    max-width: 100%;
+    height: 40px;
+    border-radius: 15px;
+    border: 2px solid transparent;
+    padding-left: 40px;
+    padding-right: 40px; 
+    transition: border-color 0.3s ease; 
     background-color: #2eaebf !important;
     color: white !important;
 }
