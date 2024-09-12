@@ -14,9 +14,12 @@ if (isset($_POST['login'])) {
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        // $user = getUserData();
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['profilepicture'] = $user['profilepicture'];
 
                 header("Location: home.php");
                 exit();
@@ -48,13 +51,16 @@ if (isset($_POST['login'])) {
 <body>
     <div class="container">
         <div class="login">
-            <h1>Connexion</h1>
+            <img src="./assets/wishflix.png" alt="Logo">
             <form action="index.php" method="post" class="loginForm">
-                <label>Pseudo</label>
+                <label>Pseudo :</label>
                 <input type="text" name="username" class="loginFormInput">
                 <br />
-                <label>Mot de passe</label>
-                <input type="password" name="password" class="loginFormInput">
+                <label>Mot de passe :</label>
+                <div class="passwordContainer">
+                    <input type="password" name="password" class="loginFormInput" id="password">
+                    <img src="./assets/eye.svg" alt="Filtre" id="view" class="filterIcon">
+                </div>
                 <br />
                 <input type="submit" name="login" value="Me Connecter" class="loginFormButton">
                 <a href="register.php"><input type="button" value="Inscription" class="loginFormButton"></a>
@@ -63,5 +69,6 @@ if (isset($_POST['login'])) {
         </div>
     </div>
 
+    <script src="script.js"></script>
 </body>
 </html>

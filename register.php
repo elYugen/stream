@@ -6,14 +6,16 @@ session_start();
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $email = $_POST['email'];
     if (!empty($username) && !empty($password)) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $dbh = dbconnect();
 
-        $query = "INSERT INTO user (username, password) VALUES (:username, :password)";
+        $query = "INSERT INTO user (username, password, email) VALUES (:username, :password, :email)";
         $stmt = $dbh->prepare($query);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $hashed_password);
+        $stmt->bindParam(':email', $email);
 
         if ($stmt->execute()) {
             $_SESSION['username'] = $username;
@@ -49,13 +51,20 @@ if (isset($_POST['login'])) {
                 <label>Pseudo</label>
                 <input type="text" name="username" class="loginFormInput">
                 <br />
+                <label>Adresse Mail</label>
+                <input type="email" name="email" class="loginFormInput">
+                <br />
                 <label>Mot de passe</label>
-                <input type="password" name="password" class="loginFormInput">
+                <div class="passwordContainer">
+                    <input type="password" name="password" class="loginFormInput" id="password">
+                    <img src="./assets/eye.svg" alt="Filtre" id="view" class="filterIcon">
+                </div>
                 <br />
                 <input type="submit" name="login" value="Me Connecter" class="loginFormButton">
                 <div class="invite"><a href="./home.php?guest=true"><p>Continuer en tant qu'invité</p></a></div>
             </form>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>

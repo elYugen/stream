@@ -23,7 +23,7 @@
     <div class="hello">
         <div class="helloYou">
             <div class="helloPicture">
-                <img src="picture.png" alt="ProfilPicture">
+                <img src="<?php echo $profilepicture ?>" alt="ProfilPicture">
             </div>
             <h3>Bonjour, <?php echo $user ?></h3>
         </div>

@@ -3,6 +3,8 @@
     require_once ('partials/session.php');
 
     $user = $_SESSION["username"];
+    $email = $_SESSION["email"];
+    $profilepicture = $_SESSION["profilepicture"];
 ?>
 
 
@@ -25,10 +27,10 @@
     <div class="profile">
         <div class="profileYou">
             <div class="profilePicture">
-                <img src="picture.png" alt="ProfilPicture">
+                <img src="<?php echo $profilepicture ?>" alt="ProfilPicture">
             </div>
             <h3><?php echo $user ?></h3>
-            <h4>monmail@mail.com</h4>
+            <h4><?php echo $email ?></h4>
         </div>
         <div class="profileNotif" id="profileNotif">
             <i class="bi bi-pencil"></i>
